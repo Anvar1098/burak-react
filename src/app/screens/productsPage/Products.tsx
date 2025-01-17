@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Container, Stack, TextField } from "@mui/material";
+import { Box, Button, Container, InputBase, Stack, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -29,13 +29,21 @@ export default function Products() {
           <Stack className={"big-box"}>
             <Box className={"title"}>Burak Restaurant</Box>
             <Stack className={"search"}>
-              <input type="text" placeholder="Type Here" />
-              <button>
-                <p>SEARCH</p>
-                <div>
-                  <SearchIcon />
-                </div>
-              </button>
+            <InputBase className="input-text"
+                     placeholder="Type here"/>
+                    <Button 
+                    endIcon={<SearchIcon />}
+                    variant="contained"
+                    style={{
+                    height: "25px",
+                    borderRadius: "18px",
+                    backgroundColor: "#D7B586;",
+                    color: "#gold",
+                    fontSize: "10px"
+                    }}
+                    >
+                 Search
+                  </Button>
             </Stack>
           </Stack>
 

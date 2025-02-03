@@ -1,9 +1,16 @@
 import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
+import { useState } from "react";
 
 export default function HomeNavbar() {
   const authMember = null;
+
+  const [count, setCount] = useState(0);  // useState Hooki orqali oddiy amalga oshirib oldik classdan farqli
+
+  const buttonHandler = () => {
+    setCount(count + 1); 
+  };
 
   return (
     <div className="home-navbar">
@@ -71,12 +78,13 @@ export default function HomeNavbar() {
                 The Choice, not just a choice
               </Box>
               <Box  className={'service-txt'}>
-                24 hours service</Box>
+                {count} hours service</Box>
               <Box className={'signup'}>
                 {!authMember ? (
                   <Button 
                   variant={"contained"}
                   className={'signup-button'}
+                  onClick={buttonHandler}
                   > SIGN UP</Button>
                   ) : null }
               </Box>

@@ -17,7 +17,7 @@ export default function HomeNavbar() {
       return () => {
         console.log('componentWillUnmount');
       };
-  }, [value]);
+  }, [value]);                          // [array dependency]
 
   /** HANDLERS **/
 

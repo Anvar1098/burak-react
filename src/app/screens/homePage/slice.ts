@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import { HomePageState } from "../../../lib/types/screen";
 import NewDishes from "./NewDishes";
 
-const initialState: HomePageState = {
+// Slice => Store ga data yuklaydi!
+
+const initialState: HomePageState = {  // initialState hosil qilindi (HomePageState ni boshlangich qiymati)
     popularDishes: [],
     newDishes: [],
     topUsers: [],
@@ -11,7 +13,7 @@ const initialState: HomePageState = {
 const homePageSlice = createSlice({
     name: 'homePage',
     initialState,
-    reducers: {
+    reducers: {                 // reducer => asosiy vazifasi storega data joylashtiradi
         setPopularDishes: (state, action) => {
             state.popularDishes = action.payload;
         },
@@ -24,9 +26,9 @@ const homePageSlice = createSlice({
     },
 });
 
-export const {setNewdishes, setTopUsers, setPopularDishes} = 
+export const {setNewdishes, setTopUsers, setPopularDishes} =    //  bunaqa qilish faqat Storega yozish uchun!
     homePageSlice.actions;
 
 
-const HomePageReducer = homePageSlice.reducer;
+const HomePageReducer = homePageSlice.reducer;             // Store ga connect qilish uchun export qilindi
 export default HomePageReducer;

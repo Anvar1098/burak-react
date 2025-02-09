@@ -10,12 +10,7 @@ import { retrieveTopUsers } from "./selector";
 import { serverApi } from "../../../lib/config";
 import { Member } from "../../../lib/types/member";
 
-const activeUsers = [
-  { memberNick: "Jack", memberImage: "/img/Jack.jpg" },
-  { memberNick: "Justin", memberImage: "/img/justin.webp" },
-  { memberNick: "Rose", memberImage: "/img/rose.webp" },
-  { memberNick: "Nusret", memberImage: "/img/nusret.webp" },
-];
+
 
 /** REDUX SLICE & SELECTOR **/
 
@@ -27,6 +22,8 @@ const topUsersRetriever = createSelector(
 
 export default function ActiveUsers() {
   const { topUsers } = useSelector(topUsersRetriever);
+
+  console.log('topUsers:', topUsers);
 
   return (
     <div className="active-users-frame">

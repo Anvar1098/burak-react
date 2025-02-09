@@ -1,6 +1,6 @@
 import  { createSelector } from "reselect";
 import { AppRootState, HomePageState } from "../../../lib/types/screen";
-import HomePage from ".";
+
 
 // Selector => Storedan datani uqiydi! (reselect orqali uqiydi)
 

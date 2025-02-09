@@ -7,10 +7,12 @@ import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setNewdishes, setPopularDishes } from "./slice";
+import { setNewdishes, setPopularDishes, setTopUsers } from "./slice";
 import { Product } from "../../../lib/types/product"; 
 import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
+import MemberService from "../../services/MemberService";
+import { Member } from "../../../lib/types/member";
 import "../../../css/home.css";
 
 
@@ -21,11 +23,12 @@ import "../../../css/home.css";
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),   // Storega datani joylash
   setNewdishes: (data: Product[]) => dispatch(setNewdishes(data)), 
+  setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
 });
 
 
 export default function HomePage() {
-  const { setPopularDishes, setNewdishes } = actionDispatch(useDispatch());
+  const { setPopularDishes, setNewdishes, setTopUsers } = actionDispatch(useDispatch());
 
    // Selector: Store => Data 
   
@@ -53,6 +56,13 @@ export default function HomePage() {
     })
     .then(data => {
       setNewdishes(data);
+    })
+    .catch((err) => console.log(err));
+
+    const member = new MemberService();
+    member.getTopusers()
+    .then((data) => {
+      setTopUsers(data);
     })
     .catch((err) => console.log(err));
   }, []);

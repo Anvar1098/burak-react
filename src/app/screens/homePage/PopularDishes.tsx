@@ -16,7 +16,7 @@ import { Product } from "../../../lib/types/product";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import { serverApi } from "../../../lib/config";
 
-/** REDUX SLICE & SELECTOR **/
+/** SELECTOR **/
 
 const popularDishesRetriever = createSelector(
   retrievePopularDishes,

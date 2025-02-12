@@ -12,10 +12,10 @@ const productsPageSlice = createSlice({
     initialState,
     reducers: {
         setRestaurant: (state, action) => {
-            state.products = action.payload;
+            state.restaurant = action.payload;
         },
         setChosenProduct: (state, action) => {
-            state.products = action.payload;
+            state.chosenProduct = action.payload;
         },
         setProducts: (state, action) => {
             state.products = action.payload;

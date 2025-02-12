@@ -11,7 +11,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat(reduxLogger),
   reducer: {
     homePage: HomePageReducer,
-    productsPage: ProductsPageReducer
+    productsPage: ProductsPageReducer,
   },
 });
 

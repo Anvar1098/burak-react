@@ -1,42 +1,61 @@
-import React from "react";
-import "../css/app.css";
+import React, { useState } from "react";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
-import  HomePage  from "./screens/homePage";
-import  ProductsPage  from "./screens/productsPage";
-import  OrdersPage  from "./screens/ordersPage";
-import  UserPage  from "./screens/userPage";
-import  HomeNavbar  from "./components/headers/HomeNavbar";
-import  OtherNavbar  from "./components/headers/OtherNavbar";
-import  HelpPage  from "./screens/helpPage";
-import   Footer  from "./components/footer";
+import HomePage from "./screens/homePage";
+import ProductsPage from "./screens/productsPage";
+import OrdersPage from "./screens/ordersPage";
+import UserPage from "./screens/userPage";
+import HomeNavbar from "./components/headers/HomeNavbar";
+import OtherNavbar from "./components/headers/OtherNavbar";
+import HelpPage from "./screens/helpPage";
+import Footer from "./components/footer";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
 import Test from "./screens/Test";
+import useBasket from "./hooks/useBasket";
 
 
 function App() {
   const location = useLocation();           // location olish uchun
-  console.log('location:', location);
+
+  const { cartItems, onAdd, onRemove, onDelete, onDeleteAll, } = useBasket();
+
+
   return (
     <>
-      {location.pathname === '/' ? <HomeNavbar/> : <OtherNavbar/>}
+      {location.pathname === '/' ? (
+        <HomeNavbar 
+          cartItems={cartItems} 
+          onAdd={onAdd}
+          onRemove={onRemove}
+          onDelete={onDelete}
+          onDeleteAll={onDeleteAll}
+        />
+      ) : (
+        <OtherNavbar
+         cartItems={cartItems} 
+         onAdd={onAdd}
+         onRemove={onRemove}
+         onDelete={onDelete}
+         onDeleteAll={onDeleteAll}
+         />
+      )}
       <Switch>
         <Route path="/products">
-          <ProductsPage />
+          <ProductsPage onAdd={onAdd} />
         </Route>
         <Route path="/orders">
-          <OrdersPage/>
+          <OrdersPage />
         </Route>
         <Route path="/member-page">
-          <UserPage/>
+          <UserPage />
         </Route>
         <Route path="/help">
-          <HelpPage/>
+          <HelpPage />
         </Route>
         <Route path="/">
-          <HomePage /> 
+          <HomePage />
         </Route>
       </Switch>
       <Footer />

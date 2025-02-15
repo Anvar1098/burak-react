@@ -9,17 +9,27 @@ import HomeNavbar from "./components/headers/HomeNavbar";
 import OtherNavbar from "./components/headers/OtherNavbar";
 import HelpPage from "./screens/helpPage";
 import Footer from "./components/footer";
+import Test from "./screens/Test";
+import useBasket from "./hooks/useBasket";
+import AuthenticationModal from "./components/auth";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
-import Test from "./screens/Test";
-import useBasket from "./hooks/useBasket";
+
 
 
 function App() {
   const location = useLocation();           // location olish uchun
 
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll, } = useBasket();
+  const [signupOpen, setSignupOpen] = useState<boolean>(false);
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
+
+  
+  /** HANDLERS **/
+
+  const handleSignupClose = () => setSignupOpen(false);
+  const handleLoginClose = () => setLoginOpen(false);
 
 
   return (
@@ -31,6 +41,8 @@ function App() {
           onRemove={onRemove}
           onDelete={onDelete}
           onDeleteAll={onDeleteAll}
+          setSignupOpen={setSignupOpen}
+          setLoginOpen={setLoginOpen}
         />
       ) : (
         <OtherNavbar
@@ -39,6 +51,8 @@ function App() {
          onRemove={onRemove}
          onDelete={onDelete}
          onDeleteAll={onDeleteAll}
+         setSignupOpen={setSignupOpen}
+         setLoginOpen={setLoginOpen}
          />
       )}
       <Switch>
@@ -59,6 +73,13 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+
+      <AuthenticationModal
+        signupOpen={signupOpen}
+        loginOpen={loginOpen}
+        handleLoginClose={handleLoginClose}
+        handleSignupClose={handleSignupClose}
+      />
     </>
   );
 }

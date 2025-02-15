@@ -1,39 +1,36 @@
 import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
-import  React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CartItem } from "../../../lib/types/search";
 
 interface HomeNavbarProps {
-   cartItems: CartItem[];
-   onAdd: (item: CartItem) => void;
-   onRemove: (item: CartItem) => void;
-   onDelete: (item: CartItem) => void;
-   onDeleteAll: () => void;
+  cartItems: CartItem[];
+  onAdd: (item: CartItem) => void;
+  onRemove: (item: CartItem) => void;
+  onDelete: (item: CartItem) => void;
+  onDeleteAll: () => void;
+  setSignupOpen: (isOpen: boolean) => void;
+  setLoginOpen: (isOpen: boolean) => void;
 }
 
 export default function HomeNavbar(props: HomeNavbarProps) {
-  const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
+  const { 
+    cartItems, 
+    onAdd, 
+    onRemove, 
+    onDelete, 
+    onDeleteAll, 
+    setSignupOpen, 
+    setLoginOpen, 
+  } = props;
   const authMember = null;
 
-  const [count, setCount] = useState<number>(0);  // useState Hooki orqali oddiy amalga oshirib oldik classdan farqli
-  const [value, setValue] = useState<boolean>(true);
 
-  useEffect(() => {
-    
-      console.log('componentDidMount'); // DATA FETCH (BACKEND dan data olib kelinadi)
-      setCount(count + 1); 
-
-      return () => {
-        console.log('componentWillUnmount');
-      };
-  }, [value]);                          // [array dependency]
 
   /** HANDLERS **/
 
-  const buttonHandler = () => {
-   setValue(!value); 
-  };
+
 
   return (
     <div className="home-navbar">
@@ -74,17 +71,17 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 Help
               </NavLink>
             </Box>
-            <Basket 
-             cartItems={cartItems}
-             onAdd={onAdd}
-             onRemove={onRemove}
-             onDelete={onDelete}
-             onDeleteAll={onDeleteAll}
+            <Basket
+              cartItems={cartItems}
+              onAdd={onAdd}
+              onRemove={onRemove}
+              onDelete={onDelete}
+              onDeleteAll={onDeleteAll}
             />
 
             {!authMember ? (
               <Box>
-                <Button variant="contained" className="login-button">
+                <Button variant="contained" className="login-button" onClick={() => setLoginOpen(true)}>
                   Login
                 </Button>
               </Box>
@@ -98,28 +95,28 @@ export default function HomeNavbar(props: HomeNavbarProps) {
           </Stack>
         </Stack>
         <Stack className={'header-frame'}>
-            <Stack className={'detail'}>
-              <Box className={'head-main-txt'}>
-                World's Most Delicious Cousine
-              </Box>
-              <Box className={'well-txt'}>
-                The Choice, not just a choice
-              </Box>
-              <Box  className={'service-txt'}>
-                {count} hours service</Box>
-              <Box className={'signup'}>
-                {!authMember ? (
-                  <Button 
+          <Stack className={'detail'}>
+            <Box className={'head-main-txt'}>
+              World's Most Delicious Cousine
+            </Box>
+            <Box className={'well-txt'}>
+              The Choice, not just a choice
+            </Box>
+            <Box className={'service-txt'}>
+              24 hours service</Box>
+            <Box className={'signup'}>
+              {!authMember ? (
+                <Button
                   variant={"contained"}
                   className={'signup-button'}
-                  onClick={buttonHandler}
-                  > SIGN UP</Button>
-                  ) : null }
-              </Box>
-            </Stack>
-            <Box className={'logo-frame'}>
-              <div className={'logo-img'}></div>
+                  onClick={() => setSignupOpen(true)}
+                > SIGN UP</Button>
+              ) : null}
             </Box>
+          </Stack>
+          <Box className={'logo-frame'}>
+            <div className={'logo-img'}></div>
+          </Box>
         </Stack>
       </Container>
     </div>

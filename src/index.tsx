@@ -9,6 +9,7 @@ import { ThemeProvider } from "@mui/material/styles"; //
 import theme from "./app/MaterialTheme";
 import "./css/index.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ContextProvider from "./app/context/ContextProvider";
 
 const container = document.getElementById('root')!;  // Real DOM
 const root = createRoot(container);
@@ -16,13 +17,15 @@ const root = createRoot(container);
 // Global Integration: REDUX, MUI, ReactRouterDom
 root.render(                                          // Virtual DOM uchun integratsiya
   <React.StrictMode>
-    <Provider store={store}>    
-      <ThemeProvider theme={theme}>   
-        <CssBaseline />
-        <Router>   
-        <App/>   
-        </Router>
-      </ThemeProvider> 
+    <Provider store={store}>
+      <ContextProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Router>
+            <App />
+          </Router>
+        </ThemeProvider>
+      </ContextProvider>
     </Provider>
   </React.StrictMode>,
 );

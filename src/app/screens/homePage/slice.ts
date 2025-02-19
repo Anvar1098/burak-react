@@ -27,7 +27,7 @@ const homePageSlice = createSlice({
 });
 
 export const {setNewdishes, setTopUsers, setPopularDishes} =    //  bunaqa qilish faqat Storega yozish uchun!
-    homePageSlice.actions;
+    homePageSlice.actions;  // action malumotni dispatchdan oladi shuni uchun alohida tashqariga export qilamiz
 
 
 const HomePageReducer = homePageSlice.reducer;             // Store ga connect qilish uchun export qilindi

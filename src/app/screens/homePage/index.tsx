@@ -20,8 +20,8 @@ import "../../../css/home.css";
 /** REDUX SLICE & SELECTOR **/
 
 
-const actionDispatch = (dispatch: Dispatch) => ({
-  setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),   // Storega datani joylash
+const actionDispatch = (dispatch: Dispatch) => ({     // action
+  setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),   // Storega datani joylash (action)
   setNewdishes: (data: Product[]) => dispatch(setNewdishes(data)), 
   setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
 });

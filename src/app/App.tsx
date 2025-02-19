@@ -12,15 +12,14 @@ import Footer from "./components/footer";
 import Test from "./screens/Test";
 import useBasket from "./hooks/useBasket";
 import AuthenticationModal from "./components/auth";
-import "../css/app.css";
-import "../css/navbar.css";
-import "../css/footer.css";
 import { sweetErrorHandling, sweetTopSuccessAlert } from "../lib/sweetAlert";
 import { Message } from "@mui/icons-material";
 import { Messages } from "../lib/config";
-import { T } from "../lib/types/common";
 import MemberService from "./services/MemberService";
 import { useGlobals } from "./hooks/useGlobals";
+import "../css/app.css";
+import "../css/navbar.css";
+import "../css/footer.css";
 
 
 
@@ -28,10 +27,17 @@ function App() {
   const location = useLocation();           // location olish uchun
   const { setAuthMember } = useGlobals();
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll, } = useBasket();
-  const [signupOpen, setSignupOpen] = useState<boolean>(false);
+  const [signupOpen, setSignupOpen] = useState<boolean>(false);  // useState ishlatib setSignupOpen orqali signupOpen ni yangiliydi!
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
+  // Note => Statelar componentlar bilan alohida ishliydi page bila emas!
+  // Hook => signal
+  // useState => qiymat saqlash uchun (value qabul qilish uchun)
+  // useEffect => life cycle hosil qilish uchun (not only for data fetch!)
+  // Redux => malumotlar bunkeri va type integration qiladi!
+  
+  
 
   /** HANDLERS **/
 

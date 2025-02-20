@@ -20,10 +20,11 @@
 
 .order-page .ord-cont .ord-main-cont {
 	width: 100%;
-	height: 1000px;
+	/* height: 1000px;*/
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	margin-bottom: 30px;
 }
 
 .order-page .ord-main-cont .order-right {

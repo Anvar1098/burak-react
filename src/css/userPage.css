@@ -105,6 +105,13 @@
 	align-items: center;
 }
 
+.user-page .user-det .img-user {
+	position: relative;
+	width: 117px;
+	height: 112px;
+	margin-top: 23px;
+  }
+
 .user-page .order-info-box .order-user-img .order-user-avatar {
 	width: 150px;
 	height: 150px;

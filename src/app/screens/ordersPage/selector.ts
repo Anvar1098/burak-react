@@ -1,24 +1,19 @@
 import { createSelector } from "reselect";
-import { AppRootState, OrdersPageState } from "../../../lib/types/screen";
-
-
-// Selector => Storedan datani uqiydi! (reselect orqali uqiydi)
+import { AppRootState } from "../../../lib/types/screen";
 
 const selectOrdersPage = (state: AppRootState) => state.ordersPage;
 
-
 export const retrievePausedOrders = createSelector(
-    selectOrdersPage,
-    // (state: AppRootState) => state.homePage
-    (OrdersPage: OrdersPageState) => OrdersPage.pausedOrders
+  selectOrdersPage,
+  (OrdersPage) => OrdersPage.pausedOrders
 );
 
 export const retrieveProcessOrders = createSelector(
-    selectOrdersPage,
-    (OrdersPage: OrdersPageState) => OrdersPage.processOrders
+  selectOrdersPage,
+  (OrdersPage) => OrdersPage.processOrders
 );
 
 export const retrieveFinishedOrders = createSelector(
-    selectOrdersPage,
-    (OrdersPage: OrdersPageState) => OrdersPage.finishedOrders
+  selectOrdersPage,
+  (OrdersPage) => OrdersPage.finishedOrders
 );

@@ -1,73 +1,93 @@
-import React  from "react";
-import { Box, Stack } from  "@mui/material";
-import Button from  "@mui/material/Button";
+import React from "react";
+import { Box, Stack } from "@mui/material";
+import Button from "@mui/material/Button";
 import TabPanel from "@mui/lab/TabPanel";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveFinishedOrders } from "./selector";
+import { Product } from "../../../lib/types/product";
+import { ProductCollection } from "../../../lib/enums/product.enum";
+import { serverApi } from "../../../lib/config";
+import { Order, OrderItem } from "../../../lib/types/order";
+
+/** SELECTOR **/
+
+const finishedOrdersRetriever = createSelector(
+  retrieveFinishedOrders,
+  (finishedOrders) => ({ finishedOrders })
+);
 
 export default function FinishedOrders() {
-    return (
-      <TabPanel value={"3"}>
+  const { finishedOrders } = useSelector(finishedOrdersRetriever);
+  return (
+    <TabPanel value={"3"}>
       <Stack>
-        {[1, 2].map((ele, index) => {
+        {finishedOrders?.map((order: Order) => {
           return (
-            <Box key={index} className={"order-main-box"}>
+            <Box key={order._id} className={"order-main-box"}>
               <Box className={"order-box"}>
-                {[1, 2, 3].map((ele2, index2) => {
+                {order?.orderItems?.map((item: OrderItem) => {
+                  const product: Product = order.productData
+                    .filter((ele: Product) => item.productId === ele._id)[0];
+                  const imagePath = `${serverApi}/${product.productImages[0]}`;
                   return (
-                    <Box key={index2} className={"order-name-price"}>
+                    <Box key={item._id} className={"order-name-price"}>
                       <div>
-                        <img src={"/img/kebab.webp"} className="foto" />
-                        <p>Steak</p>
+                        <img src={imagePath} className="foto" />
+                        <p>{product.productName}</p>
                       </div>
                       <div className="data">
-                        <p>$9</p>
-                        <img 
-                        src="icons/close.svg"
-                        style={{ marginLeft: "20px" }}
-                        />
-                        <p>2</p>
+                      <p>${item.itemPrice}</p>
                         <img
-                      src={"/icons/pause.svg"}
-                      style={{ marginLeft: "20px" }}
-                    />
-                    <p>24$</p>
+                          src="icons/close.svg"
+                          style={{ marginLeft: "20px" }}
+                        />
+                         <p>{item.itemQuantity}</p>
+                        <img
+                          src={"/icons/pause.svg"}
+                          style={{ marginLeft: "20px" }}
+                        />
+                        <p>${item.itemQuantity * item.itemPrice}</p>
                       </div>
                     </Box>
                   );
                 })}
               </Box>
               <Box className={"total-price-box"}>
-                  <Box className={"box-total"}>
-                    <p>Product price</p>
-                    <p>18$</p>
-                    <img
-                      src={"/icons/plus.svg"}
-                      style={{ marginLeft: "20px" }}
-                    />
-                    <p>Delivery Cost</p>
-                    <p>2$</p>
-                    <img
-                      src={"/icons/pause.svg"}
-                      style={{ marginLeft: "20px" }}
-                    />
-                    <p>Total</p>
-                    <p>20$</p>
-                  </Box>
+                <Box className={"box-total"}>
+                  <p>Product price</p>
+                  <p>${order.orderTotal - order.orderDelivery}</p>
+                  <img
+                    src={"/icons/plus.svg"}
+                    style={{ marginLeft: "20px" }}
+                  />
+                  <p>Delivery Cost</p>
+                  <p>${order.orderDelivery}</p>
+                  <img
+                    src={"/icons/pause.svg"}
+                    style={{ marginLeft: "20px" }}
+                  />
+                  <p>Total</p>
+                  <p>${order.orderTotal}</p>
+                </Box>
               </Box>
             </Box>
           );
         })}
 
-        {true && (
-          <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
+        {! finishedOrders ||
+           (finishedOrders.length === 0 && (
+          <Box 
+            display={"flex"} 
+            flexDirection={"row"} 
+            justifyContent={"center"}>
             <img
               src={"/icons/noimage-list.svg"}
               style={{ width: 300, height: 300 }}
             />
           </Box>
-        )}
+        ))}
       </Stack>
     </TabPanel>
   );
 }
-
-    

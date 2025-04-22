@@ -36,12 +36,14 @@ export default function OrdersPage() {
     limit: 5,
     orderStatus: OrderStatus.PAUSE,
   });
+  
   useEffect(() => {
     const order = new OrderService();
     order
       .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PAUSE })
       .then((data) => {
         setPausedOrders(data);
+        console.log("Paused Orders:", data);
       })
       .catch((err) => console.log(err));
     order

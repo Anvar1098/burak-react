@@ -27,6 +27,7 @@ export default function PausedOrders(props: PausedOrdersProps) {
   const { setValue } = props;
   const { pausedOrders } = useSelector(pausedOrdersRetriever);
   const { authMember, setOrderBuilder } = useGlobals();
+  
   /**Handlers**/
   const deleteOrderHandler = async (e: T) => {
     try {
@@ -50,6 +51,7 @@ export default function PausedOrders(props: PausedOrdersProps) {
       sweetErrorHandling(err).then();
     }
   };
+
   const processOrderHandler = async (e: T) => {
     try {
       if (!authMember) throw new Error(Messages.error2);
@@ -77,6 +79,7 @@ export default function PausedOrders(props: PausedOrdersProps) {
       sweetErrorHandling(err).then();
     }
   };
+  
   return (
     <TabPanel value="1">
       <Stack>

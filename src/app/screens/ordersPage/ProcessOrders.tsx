@@ -26,6 +26,8 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
   const { processOrders } = useSelector(processOrdersRetriever);
   const { setValue } = props;
   const { authMember, setOrderBuilder } = useGlobals();
+
+  
   const finishOrderHandler = async (e: T) => {
     try {
       if (!authMember) throw new Error(Messages.error2);
@@ -53,6 +55,7 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
       sweetErrorHandling(err).then();
     }
   };
+
   return (
     <TabPanel value="2">
       <Stack>

@@ -27,7 +27,7 @@ export default function Events() {
             clickable: true,
           }}
           autoplay={{
-            delay: 2000,
+            delay: 5000,
             disableOnInteraction: true,
           }}
         >
